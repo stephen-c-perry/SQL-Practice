@@ -27,3 +27,11 @@ order by
     market_season asc
 limit 200;
 
+
+select customer_id, customer_first_name, customer_last_name, round(SUM(quantity*cost_to_customer_per_qty),2) as total_paid, count(*) as num_transactions
+# next step add number of transactions and average transaction total
+from customer
+join customer_purchases using(customer_id)
+group by customer_id
+having total_paid >= 2500;
+
